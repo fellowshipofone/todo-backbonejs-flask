@@ -15,8 +15,8 @@ You can add, edit, delete tasks, mark each or all as completed.
 
 First, make sure to have the necessary packages in your favorite virtualenv (or elsewhere). 
 
-   pip install -r requirements.txt
+    pip install -r requirements.txt
 
 Then run the Werkzeug/Flask server with the following command, and visit http://0.0.0.0:8080/ on your favorite web browser
 
-   python run.py
+    python run.py
