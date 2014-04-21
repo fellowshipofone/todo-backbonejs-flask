@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-framework="backbonejs">
+	<head>
+		<meta charset="utf-8">
+		<title>Tictaildo</title>
+		<link rel="stylesheet" href="static/css/base.css">
+	</head>
+	<body>
+
+		<section id="tictailtodo">
+			<header id="header">
+				<h1>Todos</h1>
+				<input id="new-task" placeholder="What needs to be done?" autofocus>
+                <button class="create-task">Add Todo</button>
+			</header>
+			<section id="main">
+				<ul id="todo-list"></ul>
+			</section>
+			<footer id="footer"></footer>
+		</section>
+
+
+		<script type="text/template" id="item-template">
+			<div class="view">
+				<input class="toggle" type="checkbox" <%= is_done ? 'checked' : '' %>>
+				<label><%- task %></label>
+			</div>
+			<input class="edit" placeholder="Leave blank to delete" value="<%- task %>">
+		</script>
+		<script type="text/template" id="stats-template">
+			<span id="todo-count"><strong><%= itemsLeft %></strong> <%= itemsLeft === 1 ? 'item' : 'items' %> left</span>
+		</script>
+
+		<script src="static/js-libs/jquery-2.1.0.min.js"></script>
+		<script src="static/js-libs/underscore-1.6.0.min.js"></script>
+		<script src="static/js-libs/backbone-1.1.2.min.js"></script>
+		<script src="static/js/app.js"></script>
+	</body>
+</html>

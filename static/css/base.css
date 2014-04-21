@@ -1,0 +1,267 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: #c0c0c0;
+	font-size: 100%;
+	vertical-align: baseline;
+	/* font-family: inherit; */
+	color: inherit;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+	width: 120px;
+	height: 29px;
+	border-radius: 4px;
+}
+
+body {
+	font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	line-height: 1.4em;
+	background: #f2f2f2;
+	color: #4d4d4d;
+	width: 480px;
+	margin: 0 auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	-ms-font-smoothing: antialiased;
+	-o-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+}
+
+button,
+input[type="checkbox"] {
+  outline: none;
+}
+
+#tictailtodo {
+	background: #fff;
+	background: rgba(255, 255, 255, 0.9);
+	margin: 60px 0 40px 0;
+	border: 1px solid #c0c0c0;
+	position: relative;
+	border-radius: 5px;
+}
+
+#tictailtodo h1 {
+	width: 100%;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	color: #333;
+	border-bottom: 1px #c0c0c0 dotted;
+	height: 100px;
+	line-height: 60px;
+	margin: 30px 0 0 0;
+	padding: 0;
+}
+
+#header {
+	border-radius: inherit;
+	position: relative;
+	height: auto;
+	padding: 0;
+	margin: 0;
+}
+
+#new-task,
+.edit {
+	position: relative;
+	margin: 10px 20px 10px 20px;
+	width: 260px;
+	font-size: 14px;
+	font-family: inherit;
+	line-height: 1.4em;
+	border: 1px #c0c0c0 solid;
+	outline: none;
+	color: inherit;
+	padding: 6px;
+	border-radius: 3px;
+}
+
+#new-task {
+	background: rgba(0, 0, 0, 0.02);
+	z-index: 2;
+	box-shadow: none;
+}
+
+#main {
+	position: relative;
+	z-index: 2;
+	border-top: 1px dotted #adadad;
+	padding-bottom: 40px;
+}
+
+label[for='toggle-all'] {
+	display: none;
+}
+
+#todo-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#todo-list li {
+	position: relative;
+	font-size: 16px;
+}
+
+#todo-list li:nth-child(odd) {
+	background-color: #f1f4f8;
+}
+
+#todo-list li:last-child {
+	border-bottom: none;
+}
+
+#todo-list li.editing {
+	border-bottom: none;
+	padding: 0;
+}
+
+#todo-list li.editing .edit {
+	display: block;
+	width: 300px;
+	margin: 10px 60px 10px 58px;
+}
+
+#todo-list li.editing .view {
+	display: none;
+}
+
+#todo-list li .toggle {
+	text-align: center;
+	width: 40px;
+	/* auto, since non-WebKit browsers doesn't support input styling */
+	height: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 10px;
+	margin: auto;
+	/* Mobile Safari */
+	border: none;
+	/* -webkit-appearance: none; */
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+
+#todo-list li .toggle:after {
+	line-height: 43px;
+	font-size: 20px;
+	color: #d9d9d9;
+	text-shadow: 0 -1px 0 #bfbfbf;
+}
+
+#todo-list li .toggle:checked:after {
+	color: #85ada7;
+	text-shadow: 0 1px 0 #669991;
+	bottom: 1px;
+	position: relative;
+}
+
+#todo-list li label {
+	white-space: pre;
+	word-break: break-word;
+	padding: 15px 60px 15px 15px;
+	margin-left: 45px;
+	display: block;
+	line-height: 1.2;
+	-webkit-transition: color 0.4s;
+	transition: color 0.4s;
+}
+
+#todo-list li.is_done label {
+	color: #a9a9a9;
+	text-decoration: line-through;
+}
+
+#todo-list li .edit {
+	display: none;
+}
+
+#todo-list li.editing:last-child {
+	margin-bottom: -1px;
+}
+
+#footer {
+	color: #c0c0c0;
+	padding: 10px;
+	position: relative;
+	left: 0;
+	height: 20px;
+	z-index: 1;
+	text-align: center;
+	border-top: 1px #c0c0c0 dotted;
+}
+
+#todo-count {
+	text-align: left;
+	width: 100%;
+	display: block;
+}
+
+#filters {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: absolute;
+	right: 0;
+	left: 0;
+}
+
+#filters li {
+	display: inline;
+}
+
+#filters li a {
+	color: #83756f;
+	margin: 2px;
+	text-decoration: none;
+}
+
+#filters li a.selected {
+	font-weight: bold;
+}
+
+#clear-completed {
+	float: right;
+	position: relative;
+	line-height: 20px;
+	text-decoration: none;
+	background: rgba(0, 0, 0, 0.1);
+	font-size: 11px;
+	padding: 0 10px;
+	border-radius: 3px;
+	box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+#clear-completed:hover {
+	background: rgba(0, 0, 0, 0.15);
+	box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.3);
+}
+
+#info {
+	margin: 65px auto 0;
+	color: #a6a6a6;
+	font-size: 12px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+	text-align: center;
+}
+
+#info a {
+	color: inherit;
+}
+
+.hidden {
+	display: none;
+}
