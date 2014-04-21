@@ -89,13 +89,15 @@ def create_todo():
         else:
             is_done = False
 
+        # Re-order items if necessary
+        if order < count:
+            db.session.query(Item)\
+                .filter(Item.order >= order)\
+                .update({Item.order:Item.order+1})
+
         # Save item
         todo_item = Item(request.json['task'], is_done, order)
         db.session.add(todo_item)
-
-        # Re-order items if necessary
-        if order < count:
-            Item.update().values(order=Item.order+1).where(Item.order < order)
 
         db.session.commit()
 
@@ -132,6 +134,16 @@ def update_todo(todo_id):
         order = request.json['order']
         if order > count:
             order = count
+
+        if x.order < order:
+                db.session.query(Item)\
+                    .filter(Item.order <= order, Item.order > x.order)\
+                    .update({Item.order:Item.order-1})
+        elif x.order > order:
+                db.session.query(Item)\
+                    .filter(Item.order >= order, Item.order < x.order)\
+                    .update({Item.order:Item.order+1})
+
         x.order = order
 
     if 'is_done' in request.json:
@@ -149,6 +161,12 @@ def update_todo(todo_id):
 def delete_todo(todo_id):
     todo_item = Item.query.get_or_404(todo_id)
     db.session.delete(todo_item)
+
+    # Update order
+    db.session.query(Item)\
+                .filter(Item.order >= todo_item.order)\
+                .update({Item.order:Item.order-1})
+
     db.session.commit()
     return json.dumps(None)
 

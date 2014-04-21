@@ -61,7 +61,8 @@ var ESC_KEY = 27;
 			'click .toggle': 'toggleIsDone',
 			'dblclick label': 'edit',
 			'keydown .edit': 'saveOrRevert',
-			'blur .edit': 'save'
+			'blur .edit': 'save',
+            'drop': 'drop'
 		},
 
 		// Model events setup
@@ -127,7 +128,11 @@ var ESC_KEY = 27;
 		// Remove the item
 		clear: function () {
 			this.model.destroy();
-		}
+		},
+
+        drop: function(event, index) {
+            this.model.save({order: index});
+        }
 	});
 
 
@@ -161,6 +166,12 @@ var ESC_KEY = 27;
 			this.$footer = this.$('#footer');
 			this.$main = this.$('#main');
 			this.$list = $('#todo-list');
+
+            this.$list.sortable({
+                stop: function(event, ui) {
+                    ui.item.trigger('drop', ui.item.index());
+                }
+            });
 
 			this.listenTo(app.tasks, 'add', this.addOne);
 			this.listenTo(app.tasks, 'reset', this.addAll);
