@@ -110,12 +110,17 @@ label[for='toggle-all'] {
 }
 
 #todo-list li {
+    background-color: #FFF;
 	position: relative;
 	font-size: 16px;
 }
 
 #todo-list li:nth-child(odd) {
 	background-color: #f1f4f8;
+}
+
+#todo-list li.ui-sortable-helper {
+	border: 1px #dfe1e6 solid;
 }
 
 #todo-list li:last-child {
