@@ -26,12 +26,12 @@ class Item(db.Model):
     __tablename__ = 'todo_item'
 
     id = db.Column(db.Integer, primary_key=True)
-    task = db.Column(db.String(128),  nullable=False)
+    task = db.Column(db.String(128), nullable=False)
     is_done = db.Column(db.Boolean, nullable=False)
     order = db.Column(db.SmallInteger, nullable=False)
-    date_created  = db.Column(db.DateTime,  default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime,  default=db.func.current_timestamp(),
-                                           onupdate=db.func.current_timestamp())
+    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
+    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
+                              onupdate=db.func.current_timestamp())
 
     # New instance instantiation procedure
     def __init__(self, task, is_done, order):
@@ -54,24 +54,25 @@ class Item(db.Model):
 def index():
     return render_template("index.html")
 
+
 # 404 handling
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html'), 404
 
+
 # List items
 @app.route("/tasks", methods=['GET'])
 def get_todos():
-
-    selection = [{'id': x.id,'task': x.task, 'is_done': x.is_done, 'order': x.order}
-                 for x in Item.query.all()]
+    selection = [
+        {'id': x.id, 'task': x.task, 'is_done': x.is_done, 'order': x.order}
+        for x in Item.query.all()]
     return json.dumps(selection)
 
 
 # Create item
 @app.route("/tasks", methods=['POST'])
 def create_todo():
-
     if 'task' in request.json:
 
         # Check order value
@@ -91,9 +92,9 @@ def create_todo():
 
         # Re-order items if necessary
         if order < count:
-            db.session.query(Item)\
-                .filter(Item.order >= order)\
-                .update({Item.order:Item.order+1})
+            db.session.query(Item) \
+                .filter(Item.order >= order) \
+                .update({Item.order: Item.order + 1})
 
         # Save item
         todo_item = Item(request.json['task'], is_done, order)
@@ -110,7 +111,6 @@ def create_todo():
 # Get a single item
 @app.route("/tasks/<string:todo_id>", methods=['GET'])
 def get_todo(todo_id):
-
     x = Item.query.filter(id=todo_id)
 
     if x:
@@ -123,7 +123,6 @@ def get_todo(todo_id):
 # Update a single item
 @app.route("/tasks/<int:todo_id>", methods=['PUT'])
 def update_todo(todo_id):
-
     x = Item.query.get_or_404(todo_id)
 
     if 'task' in request.json:
@@ -136,13 +135,13 @@ def update_todo(todo_id):
             order = count
 
         if x.order < order:
-                db.session.query(Item)\
-                    .filter(Item.order <= order, Item.order > x.order)\
-                    .update({Item.order:Item.order-1})
+            db.session.query(Item) \
+                .filter(Item.order <= order, Item.order > x.order) \
+                .update({Item.order: Item.order - 1})
         elif x.order > order:
-                db.session.query(Item)\
-                    .filter(Item.order >= order, Item.order < x.order)\
-                    .update({Item.order:Item.order+1})
+            db.session.query(Item) \
+                .filter(Item.order >= order, Item.order < x.order) \
+                .update({Item.order: Item.order + 1})
 
         x.order = order
 
@@ -163,14 +162,12 @@ def delete_todo(todo_id):
     db.session.delete(todo_item)
 
     # Update order
-    db.session.query(Item)\
-                .filter(Item.order >= todo_item.order)\
-                .update({Item.order:Item.order-1})
+    db.session.query(Item) \
+        .filter(Item.order >= todo_item.order) \
+        .update({Item.order: Item.order - 1})
 
     db.session.commit()
     return json.dumps(None)
-
-
 
 
 # Build the database:
