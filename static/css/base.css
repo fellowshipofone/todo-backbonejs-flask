@@ -39,6 +39,7 @@ body {
 button,
 input[type="checkbox"] {
   outline: none;
+  cursor: pointer;
 }
 
 #tictailtodo {
@@ -99,8 +100,19 @@ input[type="checkbox"] {
 	padding-bottom: 40px;
 }
 
+
+#toggle-all {
+    display: none;
+}
+
 label[for='toggle-all'] {
-	display: none;
+	display: block;
+	width: 40%;
+	position: relative;
+	float: right;
+	color: #4b95e4;
+	text-align: right;
+    cursor: pointer;
 }
 
 #todo-list {
@@ -212,8 +224,10 @@ label[for='toggle-all'] {
 
 #todo-count {
 	text-align: left;
-	width: 100%;
+	width: 120px;
 	display: block;
+	position: relative;
+	float: left;
 }
 
 #filters {
